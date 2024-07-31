@@ -63,7 +63,7 @@ fun GradientBackground(
                             MaterialTheme.colorScheme.background
                         ),
                         Offset(
-                            x = screenWidthPx / 2f,
+                            x = -(screenWidthPx * 4f),
                             y = -(smallDimensionPx).toFloat()
                         ),
                     )
