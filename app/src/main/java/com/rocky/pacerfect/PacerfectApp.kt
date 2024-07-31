@@ -3,6 +3,7 @@ package com.rocky.pacerfect
 import android.app.Application
 import com.rocky.auth.data.di.authDataModule
 import com.rocky.auth.presentation.di.authViewModelModule
+import com.rocky.core.data.di.coreDataModule
 import com.rocky.pacerfect.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -23,7 +24,8 @@ class PacerfectApp : Application() {
             modules(
                 authDataModule,
                 authViewModelModule,
-                appModule
+                appModule,
+                coreDataModule
             )
         }
     }
