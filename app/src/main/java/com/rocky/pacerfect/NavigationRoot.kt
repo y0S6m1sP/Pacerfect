@@ -1,6 +1,5 @@
 package com.rocky.pacerfect
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -10,6 +9,7 @@ import androidx.navigation.navigation
 import com.rocky.auth.presentation.login.LoginScreen
 import com.rocky.auth.presentation.onboard.OnBoardScreen
 import com.rocky.auth.presentation.register.RegisterScreen
+import com.rocky.run.presentation.run_overview.RunOverviewScreen
 
 @Composable
 fun NavigationRoot(
@@ -78,7 +78,7 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = "run"
     ) {
         composable("run_overview") {
-            Text(text = "run overview!")
+            RunOverviewScreen()
         }
     }
 }
