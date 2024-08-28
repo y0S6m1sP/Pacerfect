@@ -57,7 +57,7 @@ fun LoginScreen(
                     context,
                     event.error.asString(context),
                     Toast.LENGTH_LONG
-                )
+                ).show()
             }
 
             LoginEvent.LoginSuccess -> {
@@ -66,8 +66,7 @@ fun LoginScreen(
                     context,
                     R.string.youre_logged_in,
                     Toast.LENGTH_LONG
-                )
-
+                ).show()
                 onLoginSuccess()
             }
         }
