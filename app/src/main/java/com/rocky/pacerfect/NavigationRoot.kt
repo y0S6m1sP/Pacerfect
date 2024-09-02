@@ -9,6 +9,7 @@ import androidx.navigation.navigation
 import com.rocky.auth.presentation.login.LoginScreen
 import com.rocky.auth.presentation.onboard.OnBoardScreen
 import com.rocky.auth.presentation.register.RegisterScreen
+import com.rocky.run.presentation.active_run.ActiveRunScreen
 import com.rocky.run.presentation.run_overview.RunOverviewScreen
 
 @Composable
@@ -79,7 +80,12 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = "run"
     ) {
         composable("run_overview") {
-            RunOverviewScreen()
+            RunOverviewScreen(
+                onStartRunClick = { navController.navigate("active_run") }
+            )
+        }
+        composable("active_run") {
+            ActiveRunScreen()
         }
     }
 }
