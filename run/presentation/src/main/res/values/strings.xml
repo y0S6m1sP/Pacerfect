@@ -7,4 +7,9 @@
     <string name="duration">Duration</string>
     <string name="distance">Distance</string>
     <string name="pace">Pace</string>
+    <string name="permission_rationale_title">Permission Required</string>
+    <string name="permission_rationale_description_both">permission_rationale_description_both</string>
+    <string name="permission_rationale_description_location">permission_rationale_description_location</string>
+    <string name="permission_rationale_description_notification">permission_rationale_description_notification</string>
+    <string name="okay">OKay</string>
 </resources>
