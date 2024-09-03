@@ -34,6 +34,7 @@ import com.rocky.core.presentation.designsystem.components.PacerfectScaffold
 import com.rocky.core.presentation.designsystem.components.PacerfectToolbar
 import com.rocky.run.presentation.R
 import com.rocky.run.presentation.active_run.components.RunDataCard
+import com.rocky.run.presentation.active_run.maps.TrackerMap
 import com.rocky.run.presentation.util.hasLocationPermission
 import com.rocky.run.presentation.util.hasNotificationPermission
 import com.rocky.run.presentation.util.shouldShowLocationPermissionRationale
@@ -129,6 +130,13 @@ private fun ActiveRunContent(
                 .fillMaxSize()
                 .background(MaterialTheme.colorScheme.surface)
         ) {
+            TrackerMap(
+                isRunFinished = state.isRunFinished,
+                currentLocation = state.currentLocation,
+                locations = state.runData.locations,
+                onSnapshot = {},
+                modifier = Modifier.fillMaxSize()
+            )
             RunDataCard(
                 elapsedTime = state.elapsedTime,
                 runData = state.runData,
