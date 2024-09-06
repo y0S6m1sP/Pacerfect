@@ -1,15 +1,18 @@
 package com.rocky.pacerfect
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
 import com.rocky.auth.presentation.login.LoginScreen
 import com.rocky.auth.presentation.onboard.OnBoardScreen
 import com.rocky.auth.presentation.register.RegisterScreen
 import com.rocky.run.presentation.active_run.ActiveRunScreen
+import com.rocky.run.presentation.active_run.service.ActiveRunService
 import com.rocky.run.presentation.run_overview.RunOverviewScreen
 
 @Composable
@@ -84,8 +87,29 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
                 onStartRunClick = { navController.navigate("active_run") }
             )
         }
-        composable("active_run") {
-            ActiveRunScreen()
+        composable(
+            route = "active_run",
+            deepLinks = listOf(
+                navDeepLink {
+                    uriPattern = "pacerfect://active_run"
+                }
+            )
+        ) {
+            val context = LocalContext.current
+            ActiveRunScreen(
+                onServiceToggle = { shouldServiceRun ->
+                    if (shouldServiceRun) {
+                        context.startService(
+                            ActiveRunService.createStartIntent(
+                                context = context,
+                                activityClass = MainActivity::class.java
+                            )
+                        )
+                    } else {
+                        context.startService(ActiveRunService.createStopIntent(context = context))
+                    }
+                }
+            )
         }
     }
 }

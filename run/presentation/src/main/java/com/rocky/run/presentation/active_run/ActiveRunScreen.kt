@@ -36,6 +36,7 @@ import com.rocky.core.presentation.designsystem.components.PacerfectToolbar
 import com.rocky.run.presentation.R
 import com.rocky.run.presentation.active_run.components.RunDataCard
 import com.rocky.run.presentation.active_run.maps.TrackerMap
+import com.rocky.run.presentation.active_run.service.ActiveRunService
 import com.rocky.run.presentation.util.hasLocationPermission
 import com.rocky.run.presentation.util.hasNotificationPermission
 import com.rocky.run.presentation.util.shouldShowLocationPermissionRationale
@@ -44,10 +45,12 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ActiveRunScreen(
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     viewModel: ActiveRunViewModel = koinViewModel()
 ) {
     ActiveRunContent(
         state = viewModel.state,
+        onServiceToggle = onServiceToggle,
         onAction = viewModel::onAction
     )
 }
@@ -55,6 +58,7 @@ fun ActiveRunScreen(
 @Composable
 private fun ActiveRunContent(
     state: ActiveRunState,
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     onAction: (ActiveRunAction) -> Unit
 ) {
     val context = LocalContext.current
@@ -107,6 +111,18 @@ private fun ActiveRunContent(
 
         if (!showLocationRationale && !showNotificationRationale) {
             permissionLauncher.requestPacerfectPermissions(context)
+        }
+    }
+
+    LaunchedEffect(key1 = state.isRunFinished) {
+        if (state.isRunFinished) {
+            onServiceToggle(false)
+        }
+    }
+
+    LaunchedEffect(key1 = state.shouldTrack) {
+        if (context.hasLocationPermission() && state.shouldTrack && !ActiveRunService.isServiceActive) {
+            onServiceToggle(true)
         }
     }
 
@@ -234,6 +250,7 @@ private fun ActiveRunScreenPreview() {
     PacerfectTheme {
         ActiveRunContent(
             state = ActiveRunState(),
+            onServiceToggle = {},
             onAction = {}
         )
     }
