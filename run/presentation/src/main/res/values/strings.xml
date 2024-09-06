@@ -12,4 +12,8 @@
     <string name="permission_rationale_description_location">permission_rationale_description_location</string>
     <string name="permission_rationale_description_notification">permission_rationale_description_notification</string>
     <string name="okay">OKay</string>
+    <string name="running_is_paused">Running is paused</string>
+    <string name="resume_or_finish_run">Resume or Finish?</string>
+    <string name="resume">Resume</string>
+    <string name="finish">Finish</string>
 </resources>

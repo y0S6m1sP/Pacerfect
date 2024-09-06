@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.rocky.core.presentation.designsystem.PacerfectTheme
 import com.rocky.core.presentation.designsystem.StartIcon
 import com.rocky.core.presentation.designsystem.StopIcon
+import com.rocky.core.presentation.designsystem.components.PacerfectActionButton
 import com.rocky.core.presentation.designsystem.components.PacerfectDialog
 import com.rocky.core.presentation.designsystem.components.PacerfectFloatingActionButton
 import com.rocky.core.presentation.designsystem.components.PacerfectOutlinedActionButton
@@ -146,6 +147,32 @@ private fun ActiveRunContent(
                     .fillMaxWidth()
             )
         }
+    }
+
+    if (!state.shouldTrack && state.hasStartedRunning) {
+        PacerfectDialog(
+            title = stringResource(id = R.string.running_is_paused),
+            onDismiss = {
+                onAction(ActiveRunAction.OnResumeRunClick)
+            },
+            description = stringResource(id = R.string.resume_or_finish_run),
+            primaryButton = {
+                PacerfectActionButton(
+                    text = stringResource(id = R.string.resume),
+                    isLoading = false,
+                    onClick = { onAction(ActiveRunAction.OnResumeRunClick) },
+                    modifier = Modifier.weight(1f)
+                )
+            },
+            secondaryButton = {
+                PacerfectOutlinedActionButton(
+                    text = stringResource(id = R.string.finish),
+                    isLoading = state.isSavingRun,
+                    onClick = { onAction(ActiveRunAction.OnFinishRunClick) },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        )
     }
 
     if (state.showLocationRationale || state.showNotificationRationale) {

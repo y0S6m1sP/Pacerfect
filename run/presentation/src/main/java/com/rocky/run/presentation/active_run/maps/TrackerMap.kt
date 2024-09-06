@@ -31,7 +31,6 @@ import com.rocky.core.domain.location.Location
 import com.rocky.core.domain.location.LocationTimestamp
 import com.rocky.core.presentation.designsystem.RunIcon
 import com.rocky.run.presentation.R
-import timber.log.Timber
 
 @Composable
 fun TrackerMap(
@@ -87,6 +86,8 @@ fun TrackerMap(
             zoomControlsEnabled = false
         )
     ) {
+        PacerfectPolyline(locations = locations)
+
         if (!isRunFinished && currentLocation != null) {
             MarkerComposable(
                 currentLocation,
