@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.pacerect.android.application.compose)
     alias(libs.plugins.pacerect.jvm.ktor)
-    alias(libs.plugins.mapsplatform.secrets.plugin)
 }
 
 android {

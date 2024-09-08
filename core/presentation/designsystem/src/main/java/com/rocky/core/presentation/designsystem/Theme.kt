@@ -20,6 +20,7 @@ val DarkColorScheme = darkColorScheme(
     secondary = PacerfectWhite,
     tertiary = PacerfectWhite,
     error = PacerfectDarkRed,
+    errorContainer = PacerfectDarkRed5
 )
 
 @Composable
