@@ -4,6 +4,7 @@ import android.app.Application
 import com.rocky.auth.data.di.authDataModule
 import com.rocky.auth.presentation.di.authViewModelModule
 import com.rocky.core.data.di.coreDataModule
+import com.rocky.core.database.di.databaseModule
 import com.rocky.pacerfect.di.appModule
 import com.rocky.run.location.di.locationModule
 import com.rocky.run.presentation.di.runPresentationModule
@@ -16,7 +17,7 @@ import timber.log.Timber
 
 class PacerfectApp : Application() {
 
-    val applicationScope  = CoroutineScope(SupervisorJob())
+    val applicationScope = CoroutineScope(SupervisorJob())
 
     override fun onCreate() {
         super.onCreate()
@@ -33,7 +34,8 @@ class PacerfectApp : Application() {
                 runPresentationModule,
                 appModule,
                 coreDataModule,
-                locationModule
+                locationModule,
+                databaseModule
             )
         }
     }
