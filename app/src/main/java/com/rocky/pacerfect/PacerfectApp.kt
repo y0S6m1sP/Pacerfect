@@ -7,6 +7,7 @@ import com.rocky.core.data.di.coreDataModule
 import com.rocky.core.database.di.databaseModule
 import com.rocky.pacerfect.di.appModule
 import com.rocky.run.location.di.locationModule
+import com.rocky.run.network.di.networkModule
 import com.rocky.run.presentation.di.runPresentationModule
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -35,7 +36,8 @@ class PacerfectApp : Application() {
                 appModule,
                 coreDataModule,
                 locationModule,
-                databaseModule
+                databaseModule,
+                networkModule
             )
         }
     }

@@ -50,7 +50,7 @@ class RunningTracker(
     init {
         _isTracking
             .onEach { isTracking ->
-                if(!isTracking) {
+                if (!isTracking) {
                     val newList = buildList {
                         addAll(runData.value.locations)
                         add(emptyList<LocationTimestamp>())
@@ -121,6 +121,13 @@ class RunningTracker(
 
     fun stopObservingLocation() {
         isObservingLocation.value = false
+    }
+
+    fun finishRun() {
+        stopObservingLocation()
+        setIsTracking(false)
+        _elapsedTime.value = Duration.ZERO
+        _runData.value = RunData()
     }
 }
 
