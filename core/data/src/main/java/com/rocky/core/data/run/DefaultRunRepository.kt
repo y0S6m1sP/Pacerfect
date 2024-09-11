@@ -8,6 +8,7 @@ import com.rocky.core.domain.run.RemoteRunDataSource
 import com.rocky.core.domain.run.Run
 import com.rocky.core.domain.run.RunId
 import com.rocky.core.domain.run.RunRepository
+import com.rocky.core.domain.run.SyncRunScheduler
 import com.rocky.core.domain.util.DataError
 import com.rocky.core.domain.util.EmptyResult
 import com.rocky.core.domain.util.Result
@@ -24,7 +25,8 @@ class DefaultRunRepository(
     private val remoteRunDataSource: RemoteRunDataSource,
     private val applicationScope: CoroutineScope,
     private val runPendingSyncDao: RunPendingSyncDao,
-    private val sessionStorage: SessionStorage
+    private val sessionStorage: SessionStorage,
+    private val syncRunScheduler: SyncRunScheduler
 ) : RunRepository {
 
     override fun getRuns(): Flow<List<Run>> {
@@ -63,6 +65,14 @@ class DefaultRunRepository(
             }
 
             is Result.Error -> {
+                applicationScope.launch {
+                    syncRunScheduler.scheduleSync(
+                        type = SyncRunScheduler.SyncType.CreateRun(
+                            run = runWithId,
+                            mapPictureBytes = mapPicture
+                        )
+                    )
+                }.join()
                 Result.Success(Unit)
             }
         }
@@ -80,6 +90,13 @@ class DefaultRunRepository(
             remoteRunDataSource.deleteRun(id)
         }.await()
 
+        if (remoteResult is Result.Error) {
+            applicationScope.launch {
+                syncRunScheduler.scheduleSync(
+                    type = SyncRunScheduler.SyncType.DeleteRun(id)
+                )
+            }.join()
+        }
     }
 
     override suspend fun syncPendingRuns() {
