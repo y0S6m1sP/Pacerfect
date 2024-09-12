@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.pacerect.android.library)
-    alias(libs.plugins.pacerect.jvm.ktor)
+    alias(libs.plugins.pacerfect.android.library)
+    alias(libs.plugins.pacerfect.jvm.ktor)
 }
 
 android {

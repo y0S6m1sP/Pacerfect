@@ -34,6 +34,10 @@ gradlePlugin {
             id = "pacerfect.android.feature.ui"
             implementationClass = "AndroidFeatureUiConventionPlugin"
         }
+        register("androidDynamicFeature"){
+            id = "pacerfect.android.dynamic.feature"
+            implementationClass = "AndroidDynamicFeatureConventionPlugin"
+        }
         register("androidRoom"){
             id = "pacerfect.android.room"
             implementationClass = "AndroidRoomConventionPlugin"

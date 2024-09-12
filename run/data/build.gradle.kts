@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.pacerect.android.library)
+    alias(libs.plugins.pacerfect.android.library)
 }
 
 android {

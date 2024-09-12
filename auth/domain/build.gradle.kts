@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.pacerect.jvm.library)
+    alias(libs.plugins.pacerfect.jvm.library)
 }
 
 dependencies {

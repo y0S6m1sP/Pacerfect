@@ -120,14 +120,15 @@ org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org
 androidDynamicFeature = { id = "com.android.dynamic-feature", version.ref = "agp" }
 mapsplatform-secrets-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsPlugin"}
 
-pacerect-android-application =  { id = "pacerfect.android.application", version = "unspecified" }
-pacerect-android-application-compose =  { id = "pacerfect.android.application.compose", version = "unspecified" }
-pacerect-android-library =  { id = "pacerfect.android.library", version = "unspecified" }
-pacerect-android-library-compose =  { id = "pacerfect.android.library.compose", version = "unspecified" }
-pacerect-android-feature-ui =  { id = "pacerfect.android.feature.ui", version = "unspecified" }
-pacerect-android-room =  { id = "pacerfect.android.room", version = "unspecified" }
-pacerect-jvm-library =  { id = "pacerfect.jvm.library", version = "unspecified" }
-pacerect-jvm-ktor =  { id = "pacerfect.jvm.ktor", version = "unspecified" }
+pacerfect-android-application =  { id = "pacerfect.android.application", version = "unspecified" }
+pacerfect-android-application-compose =  { id = "pacerfect.android.application.compose", version = "unspecified" }
+pacerfect-android-library =  { id = "pacerfect.android.library", version = "unspecified" }
+pacerfect-android-library-compose =  { id = "pacerfect.android.library.compose", version = "unspecified" }
+pacerfect-android-feature-ui =  { id = "pacerfect.android.feature.ui", version = "unspecified" }
+pacerfect-android-dynamic-feature =  { id = "pacerfect.android.dynamic.feature", version = "unspecified" }
+pacerfect-android-room =  { id = "pacerfect.android.room", version = "unspecified" }
+pacerfect-jvm-library =  { id = "pacerfect.jvm.library", version = "unspecified" }
+pacerfect-jvm-ktor =  { id = "pacerfect.jvm.ktor", version = "unspecified" }
 
 [bundles]
 compose = [

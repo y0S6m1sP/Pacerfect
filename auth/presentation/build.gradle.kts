@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.pacerect.android.feature.ui)
+    alias(libs.plugins.pacerfect.android.feature.ui)
 }
 
 android {

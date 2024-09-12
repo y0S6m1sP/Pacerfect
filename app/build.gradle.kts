@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.pacerect.android.application.compose)
-    alias(libs.plugins.pacerect.jvm.ktor)
+    alias(libs.plugins.pacerfect.android.application.compose)
+    alias(libs.plugins.pacerfect.jvm.ktor)
 }
 
 android {
@@ -18,6 +18,7 @@ android {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+    dynamicFeatures += setOf(":analytics:dynamicfeature")
 }
 
 dependencies {
