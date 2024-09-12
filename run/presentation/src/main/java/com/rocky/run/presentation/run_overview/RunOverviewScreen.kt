@@ -32,16 +32,17 @@ import com.rocky.run.presentation.run_overview.component.RunListItem
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-
 fun RunOverviewScreen(
     onStartRunClick: () -> Unit,
     onLogoutClick: () -> Unit,
+    onAnalyticsClick: () -> Unit,
     viewModel: RunOverviewViewModel = koinViewModel()
 ) {
     RunOverviewContent(
         state = viewModel.state,
         onAction = { action ->
             when (action) {
+                RunOverviewAction.OnAnalyticsClick -> onAnalyticsClick()
                 RunOverviewAction.OnStartClick -> onStartRunClick()
                 RunOverviewAction.OnLogoutClick -> onLogoutClick()
                 else -> Unit

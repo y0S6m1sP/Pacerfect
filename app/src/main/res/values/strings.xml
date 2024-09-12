@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Pacerfect</string>
     <string name="title_dynamicfeature">Analytics</string>
+    <string name="error_coludnt_load_module">Could\'nt load module</string>
+    <string name="error_installation_failed">Instanllation failed</string>
+    <string name="analytics_installed">The Analytics feature installed.</string>
+    <string name="installing_module">Installing module</string>
 </resources>

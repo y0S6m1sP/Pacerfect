@@ -1,6 +1,8 @@
 package com.rocky.pacerfect
 
 import android.app.Application
+import android.content.Context
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.rocky.auth.data.di.authDataModule
 import com.rocky.auth.presentation.di.authViewModelModule
 import com.rocky.core.data.di.coreDataModule
@@ -44,5 +46,10 @@ class PacerfectApp : Application() {
                 runDataModule,
             )
         }
+    }
+
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        SplitCompat.install(this)
     }
 }
