@@ -8,4 +8,5 @@ data class AnalyticsValues(
     val fastestEverRun: Double = 0.0,
     val avgDistance: Double = 0.0,
     val avgPace: Double = 0.0,
+    val avgDistanceOverTime: List<ChartData> = emptyList()
 )

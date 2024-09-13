@@ -6,4 +6,5 @@
     <string name="fastest_ever_run">Fastest Ever Run</string>
     <string name="avg_distance">Avg Distance</string>
     <string name="avg_pace">Avg Pace</string>
+    <string name="avg_distance_over_time">Avg. Distance Over Time</string>
 </resources>

@@ -22,6 +22,7 @@ fun AnalyticsValues.toAnalyticsDashboardState(): AnalyticsDashboardState {
         totalTimeRun = totalTimeRun.toFormattedTotalTime(),
         fastestEverRun = fastestEverRun.toFormattedKmh(),
         avgDistance = avgDistance.toFormattedKm(),
-        avgPace = avgPace.seconds.formatted()
+        avgPace = avgPace.seconds.formatted(),
+        avgDistanceOverTime = avgDistanceOverTime
     )
 }

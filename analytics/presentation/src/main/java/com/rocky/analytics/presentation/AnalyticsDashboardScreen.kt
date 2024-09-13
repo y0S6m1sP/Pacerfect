@@ -19,6 +19,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.rocky.analytics.presentation.components.AnalyticsCard
+import com.rocky.analytics.presentation.components.AnalyticsLineChartCard
 import com.rocky.core.presentation.designsystem.PacerfectTheme
 import com.rocky.core.presentation.designsystem.components.PacerfectScaffold
 import com.rocky.core.presentation.designsystem.components.PacerfectToolbar
@@ -114,6 +115,17 @@ private fun AnalyticsDashboardContent(
                         modifier = Modifier.weight(1f)
                     )
                 }
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp)
+                ) {
+                    AnalyticsLineChartCard(
+                        title = stringResource(id = R.string.avg_distance_over_time),
+                        data = state.avgDistanceOverTime,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
             }
         }
     }
@@ -129,7 +141,8 @@ private fun AnalyticsDashboardScreenPreview() {
                 totalTimeRun = "0d 0h 0m",
                 fastestEverRun = "5 km/h",
                 avgDistance = "5 km",
-                avgPace = "08:00"
+                avgPace = "08:00",
+                avgDistanceOverTime = emptyList()
             ),
             onAction = {}
         )
