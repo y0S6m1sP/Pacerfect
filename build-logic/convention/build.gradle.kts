@@ -50,5 +50,13 @@ gradlePlugin {
             id = "pacerfect.jvm.ktor"
             implementationClass = "JvmKtorConventionPlugin"
         }
+        register("jvmJUnit5"){
+            id = "pacerfect.jvm.junit5"
+            implementationClass = "JvmJUnit5ConventionPlugin"
+        }
+        register("androidJUnit5"){
+            id = "pacerfect.android.junit5"
+            implementationClass = "AndroidJUnit5ConventionPlugin"
+        }
     }
 }

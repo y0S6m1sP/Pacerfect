@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.pacerfect.android.application.compose)
     alias(libs.plugins.pacerfect.jvm.ktor)
+    alias(libs.plugins.pacerfect.android.junit5)
 }
 
 android {

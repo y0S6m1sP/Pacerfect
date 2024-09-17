@@ -1,11 +1,15 @@
 plugins {
     alias(libs.plugins.pacerfect.jvm.library)
     alias(libs.plugins.pacerfect.jvm.junit5)
+
 }
 
 dependencies {
     implementation(projects.core.domain)
+    implementation(projects.run.domain)
+
     implementation(libs.kotlinx.coroutines.core)
 
-    testImplementation(projects.core.test)
+    implementation(libs.junit5.api)
+    implementation(libs.coroutines.test)
 }
