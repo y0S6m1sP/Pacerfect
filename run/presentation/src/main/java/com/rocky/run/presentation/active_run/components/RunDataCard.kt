@@ -4,11 +4,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -24,7 +22,6 @@ import androidx.compose.ui.unit.sp
 import com.rocky.core.presentation.designsystem.PacerfectTheme
 import com.rocky.core.presentation.ui.formatted
 import com.rocky.core.presentation.ui.toFormattedKm
-import com.rocky.core.presentation.ui.toFormattedPace
 import com.rocky.run.domain.RunData
 import com.rocky.run.presentation.R
 import kotlin.time.Duration
@@ -36,37 +33,24 @@ fun RunDataCard(
     elapsedTime: Duration,
     runData: RunData
 ) {
-    Column(
+    Row(
         modifier = modifier
+            .height(64.dp)
+            .fillMaxWidth()
             .clip(RoundedCornerShape(16.dp))
-            .background(MaterialTheme.colorScheme.surface)
-            .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(MaterialTheme.colorScheme.surface),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround
     ) {
         RunDataItem(
             title = stringResource(id = R.string.duration),
             value = elapsedTime.formatted(),
-            valueFontSize = 32.sp
         )
-        Spacer(modifier = Modifier.height(24.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceAround
-        ) {
-            RunDataItem(
-                title = stringResource(id = R.string.distance),
-                value = (runData.distanceMeters / 1000.0).toFormattedKm(),
-                modifier = Modifier.defaultMinSize(minWidth = 76.dp)
-            )
-            RunDataItem(
-                title = stringResource(id = R.string.pace),
-                value = elapsedTime.toFormattedPace(
-                    distanceKm = (runData.distanceMeters / 1000.0)
-                ),
-                modifier = Modifier.defaultMinSize(minWidth = 76.dp)
-            )
-        }
+        RunDataItem(
+            title = stringResource(id = R.string.distance),
+            value = (runData.distanceMeters / 1000.0).toFormattedKm(),
+            modifier = Modifier.defaultMinSize(minWidth = 76.dp),
+        )
     }
 }
 
@@ -79,7 +63,7 @@ private fun RunDataItem(
 ) {
     Column(
         modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalAlignment = Alignment.Start
     ) {
         Text(
             text = title,

@@ -6,11 +6,9 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
@@ -65,7 +63,7 @@ private fun RunOverviewContent(
         topAppBar = {
             PacerfectToolbar(
                 showBackButton = false,
-                title = stringResource(id = R.string.pacerfect),
+                title = stringResource(id = R.string.overview),
                 scrollBehavior = scrollBehavior,
                 menuItems = listOf(
                     DropDownItem(
@@ -82,13 +80,6 @@ private fun RunOverviewContent(
                         0 -> onAction(RunOverviewAction.OnAnalyticsClick)
                         1 -> onAction(RunOverviewAction.OnLogoutClick)
                     }
-                },
-                startContent = {
-                    Icon(
-                        imageVector = RunIcon,
-                        contentDescription = null,
-                        modifier = Modifier.size(24.dp)
-                    )
                 },
             )
         },

@@ -4,6 +4,7 @@ package com.rocky.auth.presentation.login
 
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -40,7 +41,6 @@ import com.rocky.core.presentation.ui.ObserveAsEvents
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
-
 fun LoginScreen(
     onLoginSuccess: () -> Unit,
     onSignUpClick: () -> Unit,
@@ -95,8 +95,9 @@ private fun LoginContent(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 16.dp, vertical = 32.dp)
-                .padding(top = 16.dp)
-        ) {
+                .padding(top = 16.dp),
+
+            ) {
             Text(
                 text = stringResource(id = R.string.hi_there),
                 fontWeight = FontWeight.SemiBold,
@@ -107,9 +108,7 @@ private fun LoginContent(
                 fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.surfaceVariant
             )
-
             Spacer(modifier = Modifier.height(48.dp))
-
             PacerfectTextField(
                 state = state.email,
                 startIcon = MailIcon,
@@ -130,6 +129,20 @@ private fun LoginContent(
                 title = stringResource(id = R.string.password),
                 modifier = Modifier.fillMaxWidth()
             )
+            Spacer(modifier = Modifier.height(8.dp))
+            Box(
+                modifier = Modifier.fillMaxWidth(),
+                contentAlignment = Alignment.CenterEnd
+            ) {
+                Text(
+                    modifier = Modifier.clickable {
+                        //todo: forgot password
+                    },
+                    text = stringResource(id = R.string.forgot_password),
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    fontSize = 14.sp
+                )
+            }
             Spacer(modifier = Modifier.height(32.dp))
             PacerfectActionButton(
                 text = stringResource(id = R.string.login),

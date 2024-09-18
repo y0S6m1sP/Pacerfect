@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -175,7 +176,7 @@ private fun ActiveRunContent(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface)
+                .background(MaterialTheme.colorScheme.onSurface)
         ) {
             TrackerMap(
                 isRunFinished = state.isRunFinished,
@@ -190,6 +191,13 @@ private fun ActiveRunContent(
                 },
                 modifier = Modifier.fillMaxSize()
             )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(end = 72.dp),
+            contentAlignment = Alignment.BottomStart
+        ) {
             RunDataCard(
                 elapsedTime = state.elapsedTime,
                 runData = state.runData,

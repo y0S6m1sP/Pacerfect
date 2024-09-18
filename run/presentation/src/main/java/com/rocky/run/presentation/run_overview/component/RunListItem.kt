@@ -47,9 +47,8 @@ import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import com.rocky.core.domain.location.Location
 import com.rocky.core.domain.run.Run
-import com.rocky.core.presentation.designsystem.CalendarIcon
 import com.rocky.core.presentation.designsystem.PacerfectTheme
-import com.rocky.core.presentation.designsystem.RunIcon
+import com.rocky.core.presentation.designsystem.TimerIcon
 import com.rocky.run.presentation.R
 import com.rocky.run.presentation.run_overview.mappers.toRunUi
 import com.rocky.run.presentation.run_overview.model.RunDataUi
@@ -80,19 +79,21 @@ fun RunListItem(
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            MapImage(imageUrl = runUi.mapPictureUrl)
-            RunningTimeSection(
-                duration = runUi.duration,
+            Row(modifier = Modifier.fillMaxWidth()) {
+                RunningTimeSection(
+                    duration = runUi.duration,
+                    dateTime = runUi.dateTime,
+                    modifier = Modifier.fillMaxWidth()
+                )
+            }
+            DataGrid(
+                runUi = runUi,
                 modifier = Modifier.fillMaxWidth()
             )
             HorizontalDivider(
                 color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.4f)
             )
-            RunningDateSection(dateTime = runUi.dateTime)
-            DataGrid(
-                runUi = runUi,
-                modifier = Modifier.fillMaxWidth()
-            )
+            MapImage(imageUrl = runUi.mapPictureUrl)
         }
         DropdownMenu(
             expanded = showDropDown,
@@ -144,7 +145,7 @@ private fun DataGrid(
     val maxWidthDp = with(LocalDensity.current) { maxWidth.toDp() }
     FlowRow(
         modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         runDataUiList.forEach { run ->
@@ -161,30 +162,9 @@ private fun DataGrid(
 }
 
 @Composable
-fun RunningDateSection(
-    dateTime: String,
-    modifier: Modifier = Modifier
-) {
-    Row(
-        modifier = modifier,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            imageVector = CalendarIcon,
-            contentDescription = null,
-            tint = MaterialTheme.colorScheme.onSurface
-        )
-        Spacer(modifier = Modifier.width(16.dp))
-        Text(
-            text = dateTime,
-            color = MaterialTheme.colorScheme.onSurface
-        )
-    }
-}
-
-@Composable
 fun RunningTimeSection(
     duration: String,
+    dateTime: String,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -205,7 +185,7 @@ fun RunningTimeSection(
             contentAlignment = Alignment.Center
         ) {
             Icon(
-                imageVector = RunIcon,
+                imageVector = TimerIcon,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.primary
             )
@@ -217,13 +197,36 @@ fun RunningTimeSection(
         ) {
             Text(
                 text = stringResource(R.string.total_run_time),
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                fontSize = 14.sp
             )
             Text(
                 text = duration,
                 color = MaterialTheme.colorScheme.onSurface
             )
         }
+        Spacer(modifier = Modifier.width(16.dp))
+        Box(
+            modifier = Modifier
+                .height(40.dp)
+                .width(80.dp)
+                .clip(RoundedCornerShape(10.dp))
+                .border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    shape = RoundedCornerShape(10.dp)
+                )
+                .padding(4.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            Row {
+                Text(
+                    text = dateTime,
+                    color = MaterialTheme.colorScheme.onSurface,
+                )
+            }
+        }
+
     }
 }
 
@@ -283,7 +286,8 @@ private fun DataGridCell(
         Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = runData.value,
-            color = MaterialTheme.colorScheme.onSurface
+            color = MaterialTheme.colorScheme.onSurface,
+            fontSize = 14.sp
         )
     }
 }

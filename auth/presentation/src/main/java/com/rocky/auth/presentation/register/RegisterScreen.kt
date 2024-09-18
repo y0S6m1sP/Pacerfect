@@ -4,6 +4,7 @@ package com.rocky.auth.presentation.register
 
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -95,46 +96,11 @@ private fun RegisterContent(
                 .verticalScroll(rememberScrollState())
                 .fillMaxSize()
                 .padding(horizontal = 16.dp, vertical = 32.dp)
-                .padding(top = 16.dp)
-        ) {
+                .padding(top = 16.dp),
+            ) {
             Text(
                 text = stringResource(id = R.string.create_account),
                 style = MaterialTheme.typography.headlineMedium
-            )
-            val annotatedString = buildAnnotatedString {
-                withStyle(
-                    style = SpanStyle(
-                        fontFamily = Poppins,
-                        color = PacerfectGray
-                    )
-                ) {
-                    append(stringResource(id = R.string.already_have_an_account) + " ")
-                    pushStringAnnotation(
-                        tag = "clickable_text",
-                        annotation = stringResource(id = R.string.login)
-                    )
-                    withStyle(
-                        style = SpanStyle(
-                            fontWeight = FontWeight.SemiBold,
-                            fontFamily = Poppins,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                    ) {
-                        append(stringResource(id = R.string.login))
-                    }
-                }
-            }
-            ClickableText(
-                text = annotatedString,
-                onClick = { offset ->
-                    annotatedString.getStringAnnotations(
-                        tag = "clickable_text",
-                        start = offset,
-                        end = offset
-                    ).firstOrNull()?.let {
-                        onAction(RegisterAction.OnLoginClick)
-                    }
-                }
             )
             Spacer(modifier = Modifier.height(48.dp))
             PacerfectTextField(
@@ -180,19 +146,60 @@ private fun RegisterContent(
                 isValid = state.passwordValidationState.hasUpperCaseCharacter
             )
             Spacer(modifier = Modifier.height(32.dp))
+            PacerfectActionButton(
+                text = stringResource(id = R.string.register),
+                isLoading = state.isRegistering,
+                enabled = state.canRegister,
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    onAction(RegisterAction.OnRegisterClick)
+                }
+            )
         }
         Spacer(modifier = Modifier.weight(1f))
-        PacerfectActionButton(
-            text = stringResource(id = R.string.register),
-            isLoading = state.isRegistering,
-            enabled = state.canRegister,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp, vertical = 32.dp),
-            onClick = {
-                onAction(RegisterAction.OnRegisterClick)
+        val annotatedString = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    fontFamily = Poppins,
+                    color = PacerfectGray
+                )
+            ) {
+                append(stringResource(id = R.string.already_have_an_account) + " ")
+                pushStringAnnotation(
+                    tag = "clickable_text",
+                    annotation = stringResource(id = R.string.login)
+                )
+                withStyle(
+                    style = SpanStyle(
+                        fontWeight = FontWeight.SemiBold,
+                        fontFamily = Poppins,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+                ) {
+                    append(stringResource(id = R.string.login))
+                }
             }
-        )
+        }
+        Box(
+            modifier = Modifier
+                .align(Alignment.CenterHorizontally)
+                .weight(1f)
+                .padding(bottom = 32.dp),
+            contentAlignment = Alignment.BottomCenter
+        ) {
+            ClickableText(
+                text = annotatedString,
+                onClick = { offset ->
+                    annotatedString.getStringAnnotations(
+                        tag = "clickable_text",
+                        start = offset,
+                        end = offset
+                    ).firstOrNull()?.let {
+                        onAction(RegisterAction.OnLoginClick)
+                    }
+                }
+            )
+        }
     }
 }
 

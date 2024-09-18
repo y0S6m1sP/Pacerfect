@@ -1,5 +1,6 @@
 package com.rocky.auth.presentation.onboard
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -53,37 +54,43 @@ fun OnBoardContent(
                 .weight(1f),
             contentAlignment = Alignment.Center
         ) {
-            PacerfectLogoVertical()
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+                    .padding(bottom = 48.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                PacerfectLogoVertical()
+                Spacer(modifier = Modifier.height(48.dp))
+                PacerfectActionButton(
+                    text = stringResource(id = R.string.sign_in),
+                    isLoading = false,
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { onAction(OnBoardAction.OnSignInClick) }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                PacerfectOutlinedActionButton(
+                    text = stringResource(id = R.string.sign_up),
+                    isLoading = false,
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = { onAction(OnBoardAction.OnSignUpClick) }
+                )
+            }
         }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp)
-                .padding(bottom = 48.dp)
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.BottomCenter,
         ) {
             Text(
-                text = stringResource(id = R.string.welcome_to_pacerfect),
+                text = stringResource(id = R.string.continue_as_guest),
+                fontSize = 12.sp,
                 color = MaterialTheme.colorScheme.onBackground,
-                fontSize = 20.sp
-            )
-            Spacer(modifier = Modifier.height(8.dp))
-            Text(
-                text = stringResource(id = R.string.pacerfect_description),
-                style = MaterialTheme.typography.bodySmall
-            )
-            Spacer(modifier = Modifier.height(32.dp))
-            PacerfectOutlinedActionButton(
-                text = stringResource(id = R.string.sign_in),
-                isLoading =false,
-                modifier = Modifier.fillMaxWidth(),
-                onClick = { onAction(OnBoardAction.OnSignInClick) }
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            PacerfectActionButton(
-                text = stringResource(id = R.string.sign_up),
-                isLoading = false,
-                modifier =  Modifier.fillMaxWidth(),
-                onClick = { onAction(OnBoardAction.OnSignUpClick) }
+                modifier = Modifier
+                    .padding(32.dp)
+                    .clickable {
+                        //todo: continue as guest
+                    }
             )
         }
     }

@@ -87,3 +87,19 @@ val VisibilityOffIcon: ImageVector
 val VisibilityIcon: ImageVector
     @Composable
     get() = ImageVector.vectorResource(id = R.drawable.visibility)
+
+val TimerIcon: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.timer)
+
+val SpeedIcon: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.speed)
+
+val AvgTimeIcon: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.avg_time)
+
+val AvgPaceIcon: ImageVector
+    @Composable
+    get() = ImageVector.vectorResource(id = R.drawable.avg_pace)

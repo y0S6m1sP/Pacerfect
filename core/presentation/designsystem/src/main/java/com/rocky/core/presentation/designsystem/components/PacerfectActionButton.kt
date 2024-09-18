@@ -40,7 +40,7 @@ fun PacerfectActionButton(
             disabledContainerColor = PacerfectGray,
             disabledContentColor = PacerfectBlack
         ),
-        shape = RoundedCornerShape(100f),
+        shape = RoundedCornerShape(16.dp),
         modifier = modifier
             .height(IntrinsicSize.Min)
     ) {
@@ -85,7 +85,7 @@ fun PacerfectOutlinedActionButton(
             width = 0.5.dp,
             color = MaterialTheme.colorScheme.onBackground
         ),
-        shape = RoundedCornerShape(100f),
+        shape = RoundedCornerShape(16.dp),
         modifier = modifier
             .height(IntrinsicSize.Min)
     ) {

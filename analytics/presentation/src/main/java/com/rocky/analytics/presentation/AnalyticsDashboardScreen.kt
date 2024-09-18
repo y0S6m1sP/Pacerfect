@@ -9,18 +9,27 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.rocky.analytics.presentation.components.AnalyticsBigCard
 import com.rocky.analytics.presentation.components.AnalyticsCard
 import com.rocky.analytics.presentation.components.AnalyticsLineChartCard
+import com.rocky.core.presentation.designsystem.AvgPaceIcon
+import com.rocky.core.presentation.designsystem.AvgTimeIcon
 import com.rocky.core.presentation.designsystem.PacerfectTheme
+import com.rocky.core.presentation.designsystem.SpeedIcon
 import com.rocky.core.presentation.designsystem.components.PacerfectScaffold
 import com.rocky.core.presentation.designsystem.components.PacerfectToolbar
 import org.koin.androidx.compose.koinViewModel
@@ -67,7 +76,8 @@ private fun AnalyticsDashboardContent(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(padding),
+                    .padding(padding)
+                    .verticalScroll(rememberScrollState()),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 Row(
@@ -75,55 +85,66 @@ private fun AnalyticsDashboardContent(
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
                 ) {
-                    AnalyticsCard(
+                    AnalyticsBigCard(
                         title = stringResource(id = R.string.total_distance_run),
                         value = state.totalDistanceRun,
                         modifier = Modifier.weight(1f)
                     )
                     Spacer(modifier = Modifier.width(16.dp))
-                    AnalyticsCard(
+                    AnalyticsBigCard(
                         title = stringResource(id = R.string.total_time_run),
                         value = state.totalTimeRun,
                         modifier = Modifier.weight(1f)
                     )
                 }
-                Row(
+                if (state.avgDistanceOverTime.size > 1) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp)
+                    ) {
+                        AnalyticsLineChartCard(
+                            title = stringResource(id = R.string.avg_distance_over_time),
+                            data = state.avgDistanceOverTime,
+                            modifier = Modifier.weight(1f)
+                        )
+                    }
+                }
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp)
                 ) {
+                    Row {
+                        Text(
+                            text = stringResource(id = R.string.statistics),
+                        )
+                        Spacer(modifier = Modifier.weight(1f))
+                        Text(
+                            text = stringResource(id = R.string.view),
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                    Spacer(modifier = Modifier.height(16.dp))
                     AnalyticsCard(
                         title = stringResource(id = R.string.fastest_ever_run),
                         value = state.fastestEverRun,
-                        modifier = Modifier.weight(1f)
+                        icon = SpeedIcon,
+                        modifier = Modifier.fillMaxWidth()
                     )
-                    Spacer(modifier = Modifier.width(16.dp))
+                    Spacer(modifier = Modifier.height(16.dp))
                     AnalyticsCard(
                         title = stringResource(id = R.string.avg_distance),
                         value = state.avgDistance,
-                        modifier = Modifier.weight(1f)
+                        icon = AvgTimeIcon,
+                        modifier = Modifier.fillMaxWidth()
                     )
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                ) {
+                    Spacer(modifier = Modifier.height(16.dp))
                     AnalyticsCard(
                         title = stringResource(id = R.string.avg_pace),
                         value = state.avgPace,
-                        modifier = Modifier.weight(1f)
-                    )
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp)
-                ) {
-                    AnalyticsLineChartCard(
-                        title = stringResource(id = R.string.avg_distance_over_time),
-                        data = state.avgDistanceOverTime,
-                        modifier = Modifier.weight(1f)
+                        icon = AvgPaceIcon,
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
             }
